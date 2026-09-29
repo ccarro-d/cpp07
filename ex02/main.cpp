@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "Array.hpp"
 
 #define MAX_VAL 750
@@ -6,10 +8,10 @@ int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
-    srand(time(NULL));
+    std::srand(std::time(NULL));
     for (int i = 0; i < MAX_VAL; i++)
     {
-        const int value = rand();
+        const int value = std::rand();
         numbers[i] = value;
         mirror[i] = value;
     }
@@ -23,7 +25,8 @@ int main(int, char**)
     {
         if (mirror[i] != numbers[i])
         {
-            std::cerr << "didn't save the same value!!" << std::endl;
+            std::cout << "didn't save the same value!!" << std::endl;
+            delete [] mirror;
             return 1;
         }
     }
@@ -33,7 +36,7 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cout << e.what() << '\n';
     }
     try
     {
@@ -41,12 +44,12 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cout << e.what() << '\n';
     }
 
     for (int i = 0; i < MAX_VAL; i++)
     {
-        numbers[i] = rand();
+        numbers[i] = std::rand();
     }
     delete [] mirror;//
     return 0;
